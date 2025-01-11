@@ -20,9 +20,7 @@ let notes = [
               important: true
             }
         ]
- const unknownEndpoint = (request, response) => {
-    response.status(404).send({error: 'unknown endpoint'})
- }
+
  app.use(cors())
 app.use(express.json())
  const generateId = () => {
@@ -31,7 +29,7 @@ app.use(express.json())
     : 0
     return String(maxId + 1) 
  }
- app.use(unknownEndpoint)
+ 
 
 
  app.post('/api/notes', (request, response) => {
@@ -75,3 +73,7 @@ app.delete('/api/notes/:id', (request, response) => {
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`)
     })
+ const unknownEndpoint = (request, response) => {
+    response.status(404).send({error: 'unknown endpoint'})
+ }
+app.use(unknownEndpoint)
